@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.media.ExifInterface;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -31,17 +32,19 @@ public class GalleryActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        int backgroundColor = getResources().getColor(R.color.colorBackground);
+
         setContentView(R.layout.activity_gallery);
         LinearLayout layout = (LinearLayout) findViewById(R.id.linear);
         final ImageView imageView2 = (ImageView)findViewById(R.id.imageView2);
-        layout.setBackgroundColor(Color.BLACK);
+        layout.setBackgroundColor(backgroundColor);
 //        list = imageReader(Environment.getExternalStorageDirectory());
         list = imageReader( new File(Environment.getExternalStorageDirectory() + File.separator+ "pola"));
 //        Environment.getExternalStorageDirectory() + File.separator+ "pola"
 
         for(int i=0; i< list.size(); i++) {
             ImageView imageView = new ImageView(this);
-            imageView.setPadding(10, 10, 10, 60);
+            imageView.setPadding(40, 40, 40, 40);
             imageView.setAdjustViewBounds(true);
             Log.v( "Gallery" ,"IMAGEPARAM1: "+ layout.getHeight());
 
@@ -86,7 +89,8 @@ public class GalleryActivity extends AppCompatActivity {
                 //          gd.setShape(GradientDrawable.RECTANGLE);
                 //          gd.setColor(Color.BLACK);
                 //         imageView.setImageDrawable(gd);
-                imageView.setBackgroundColor(Color.WHITE);
+                int background = getResources().getColor(R.color.colorBackground);
+                imageView.setBackgroundColor(background);
                 imageView.setScaleType(ImageView.ScaleType.FIT_XY);
                 layout.addView(imageView);
 
