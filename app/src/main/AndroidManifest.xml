@@ -24,6 +24,9 @@
         </activity>
         <activity android:name=".EditGalleryActivity" android:screenOrientation="landscape"/>
         <activity android:name=".GalleryActivity" android:screenOrientation="landscape"/>
+        <activity android:name=".SelectedPicture" android:screenOrientation="landscape"/>
+
+
     </application>
 
 </manifest>

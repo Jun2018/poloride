@@ -8,6 +8,7 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -36,8 +38,11 @@ public class GalleryActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_gallery);
         LinearLayout layout = (LinearLayout) findViewById(R.id.linear);
-        final ImageView imageView2 = (ImageView)findViewById(R.id.imageView2);
+
+ //       final ImageView imageView2 = (ImageView)findViewById(R.id.imageView2);
+
         layout.setBackgroundColor(backgroundColor);
+
 //        list = imageReader(Environment.getExternalStorageDirectory());
         list = imageReader( new File(Environment.getExternalStorageDirectory() + File.separator+ "pola"));
 //        Environment.getExternalStorageDirectory() + File.separator+ "pola"
@@ -52,16 +57,18 @@ public class GalleryActivity extends AppCompatActivity {
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    String uri = list.get(view.getId()).toString();
 
-                    imageView2.setBackgroundColor(Color.BLACK);
-                    Log.v("imageViewClick",view.getBackground().toString());
-                    Log.v( "Gallery" ,"setOnClickListener: "+ list.get(view.getId()));
-                    imageView2.setImageURI(Uri.parse(list.get(view.getId()).toString()));
-//                    Intent intent = new Intent(getApplicationContext(), EditGalleryActivity.class);
-//                    intent.putExtra("image", view.getId());
-//                    ImageView pickImage = findViewById(view.getId());
-//                    Log.v("Image", pickImage.toString());
-//                    startActivity(intent);
+                    Intent intent = new Intent(getApplicationContext(), SelectedPicture.class);
+                    intent.putExtra("Data", uri);
+                    startActivity(intent);
+/*
+                   imageView2.setBackgroundColor(Color.BLACK);
+                   Log.v("imageViewClick",view.getBackground().toString());
+                   Log.v( "Gallery" ,"setOnClickListener: "+ list.get(view.getId()));
+                   imageView2.setImageURI(Uri.parse(list.get(view.getId()).toString()));
+*/
+
 
                 }
             });

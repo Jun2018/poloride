@@ -387,10 +387,10 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i("DEBUG", "width = " + width + ", height = " + height);
 
-        Bitmap result = Bitmap.createBitmap(width+200, height+150, cameraFrame.getConfig());
+        Bitmap result = Bitmap.createBitmap(width+100, height+150, cameraFrame.getConfig());
         Canvas canvas = new Canvas(result);
         canvas.drawBitmap(cameraFrame, 0f, 0f, null);
-        canvas.drawBitmap(cameraBitmap, 100f, 50f, null);
+        canvas.drawBitmap(cameraBitmap, 50f, 50f, null);
 
         canvas.drawText(strTime, 900f, 570f, tPaint);
 
