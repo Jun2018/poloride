@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
 
         Button button = (Button)findViewById(R.id.btnCapture);
@@ -315,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
             matrix.postRotate(orientation);
             CameraBitmap =  Bitmap.createBitmap(CameraBitmap, 0, 0, w, h, matrix, true);
 
-            CameraBitmap = resizeBitmapImage(CameraBitmap, 960);
+            CameraBitmap = resizeBitmap(CameraBitmap, 500);
             Bitmap resultBitmap = combineImages(CameraBitmap);
 
             if (resultBitmap == null){
@@ -336,35 +336,17 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    public Bitmap resizeBitmapImage(Bitmap source, int maxResolution)
-    {
-        int width = source.getWidth();
-        int height = source.getHeight();
-        int newWidth = width;
-        int newHeight = height;
-        float rate = 0.0f;
+    static public Bitmap resizeBitmap(Bitmap original, int resizeWidth) {
 
-        if(width > height)
-        {
-            if(maxResolution < width)
-            {
-                rate = maxResolution / (float) width;
-                newHeight = (int) (height * rate);
-                newWidth = maxResolution;
-            }
+        double aspectRatio = (double) original.getHeight() / (double) original.getWidth();
+        int targetHeight = (int) (resizeWidth * aspectRatio);
+        Bitmap result = Bitmap.createScaledBitmap(original, resizeWidth, targetHeight, false);
+        if (result != original) {
+            original.recycle();
         }
-        else
-        {
-            if(maxResolution < height)
-            {
-                rate = maxResolution / (float) height;
-                newWidth = (int) (width * rate);
-                newHeight = maxResolution;
-            }
-        }
-
-        return Bitmap.createScaledBitmap(source, newWidth, newHeight, true);
+        return result;
     }
+
 
     @SuppressLint("ResourceAsColor")
     public Bitmap combineImages(Bitmap cameraBitmap) {
@@ -374,25 +356,12 @@ public class MainActivity extends AppCompatActivity {
         width = cameraBitmap.getWidth();
         height = cameraBitmap.getHeight();
 
-        SimpleDateFormat df = new SimpleDateFormat("yy  MM  dd", Locale.KOREA);
-        String strTime = df.format(new Date());
-
-        int timeColor = getResources().getColor(R.color.colorTime);
-
-        Paint tPaint = new Paint();
-        tPaint.setTextSize(20);
-        tPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-        tPaint.setColor(timeColor);
-        tPaint.setStyle(Paint.Style.FILL);
-
         Log.i("DEBUG", "width = " + width + ", height = " + height);
 
-        Bitmap result = Bitmap.createBitmap(width+100, height+150, cameraFrame.getConfig());
+        Bitmap result = Bitmap.createBitmap(width+110, height+280, cameraFrame.getConfig());
         Canvas canvas = new Canvas(result);
         canvas.drawBitmap(cameraFrame, 0f, 0f, null);
-        canvas.drawBitmap(cameraBitmap, 50f, 50f, null);
-
-        canvas.drawText(strTime, 900f, 570f, tPaint);
+        canvas.drawBitmap(cameraBitmap, 55, 100, null);
 
         saveBitmaptoJpeg(result);
         return result;

@@ -31,8 +31,18 @@ public class SelectedPicture extends AppCompatActivity {
         Intent intent = getIntent();
         uri = intent.getStringExtra("Data");
 
+        Bitmap image = BitmapFactory.decodeFile(uri);
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
+        imageView.setImageBitmap(image);
+
+        /*
+        Intent intent = getIntent();
+        uri = intent.getStringExtra("Data");
+
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         imageView.setImageURI(Uri.parse(uri));
+*/
+
 
         Toast.makeText(SelectedPicture.this, uri, Toast.LENGTH_LONG).show(); //uri 확인용...
 
@@ -42,6 +52,17 @@ public class SelectedPicture extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        final Button btn_font = (Button)findViewById(R.id.btnDeco);
+        btn_font.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), DecoActivity.class);
+                intent.putExtra("URI", uri);
                 startActivity(intent);
             }
         });
