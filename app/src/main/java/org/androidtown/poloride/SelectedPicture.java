@@ -76,6 +76,21 @@ public class SelectedPicture extends AppCompatActivity {
             }
         });
 
+
+        //공유하기 버튼 구현
+        final Button btnSharing = (Button)findViewById(R.id.btnShare); //버튼 찾아옴
+        btnSharing.setOnClickListener(new View.OnClickListener() { //버튼 클릭이벤트함수
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SEND); //전송 메소드 호출. Intent.ACTION_SEND
+                intent.setType("image/*"); //jpg 이미지를 공유 하기 위해 Type을 지정. 여기서는 모든 파일하려고 *
+                intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(uri));
+                startActivity(Intent.createChooser(intent, "공유"));
+
+            }
+
+        });
+
     }
 
 }
