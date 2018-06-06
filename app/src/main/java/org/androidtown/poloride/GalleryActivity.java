@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -46,6 +47,7 @@ public class GalleryActivity extends AppCompatActivity {
 //        list = imageReader(Environment.getExternalStorageDirectory());
         list = imageReader( new File(Environment.getExternalStorageDirectory() + File.separator+ "pola"));
 //        Environment.getExternalStorageDirectory() + File.separator+ "pola"
+
 
         for(int i=0; i< list.size(); i++) {
             ImageView imageView = new ImageView(this);
