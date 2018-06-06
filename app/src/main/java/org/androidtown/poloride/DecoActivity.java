@@ -8,14 +8,22 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -27,12 +35,9 @@ public class DecoActivity extends AppCompatActivity {
     int btnState = 0;
     float x = 0;
     float y = 0;
+    String FileName = null;
     String inputString=null;
 
-    float imageViweWidth;
-    float imageViweHeight;
-    float widthGap;
-    float heightGap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +48,7 @@ public class DecoActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        setContentView(R.layout.activity_font);
+        setContentView(R.layout.activity_deco);
 
         Intent intent = getIntent();
         uri = intent.getStringExtra("URI");
@@ -55,8 +60,7 @@ public class DecoActivity extends AppCompatActivity {
         editText = (EditText)findViewById(R.id.text);
         //editText.setOnTouchListener(this);
 
-        imageViweWidth = image.getWidth();
-        imageViweHeight = image.getHeight();
+
 
         Button btn_InputDate = (Button) findViewById(R.id.btnInputdate);
         btn_InputDate.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +87,7 @@ public class DecoActivity extends AppCompatActivity {
                 Bitmap result = Bitmap.createBitmap(width, height, imageviewBitmap.getConfig());
                 Canvas canvas = new Canvas(result);
                 canvas.drawBitmap(imageviewBitmap, 0f, 0f, null);
-                canvas.drawText(strTime, 400f, 740f, tPaint);
+                canvas.drawText(strTime, 420f, 770f, tPaint);
 
                 //Drawable drawable = new BitmapDrawable(result);
 
@@ -127,7 +131,7 @@ public class DecoActivity extends AppCompatActivity {
                         Bitmap result = Bitmap.createBitmap(width, height, imageviewBitmap.getConfig());
                         Canvas canvas = new Canvas(result);
                         canvas.drawBitmap(imageviewBitmap, 0f, 0f, null);
-                        canvas.drawText(inputString, 70f, 880f, tPaint);
+                        canvas.drawText(inputString, 80f, 935f, tPaint);
 
                         //Drawable drawable = new BitmapDrawable(result);
 
@@ -142,7 +146,59 @@ public class DecoActivity extends AppCompatActivity {
             }
         });
 
+        final Button btn_save = (Button) findViewById(R.id.btnSave);
+        btn_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BitmapDrawable d = (BitmapDrawable)((ImageView) findViewById(R.id.imageView)).getDrawable();
+                Bitmap b = d.getBitmap();
+                saveBitmaptoJpeg(b);
+            }
+        });
     }
+
+    public  void saveBitmaptoJpeg(Bitmap bitmap){
+        //    String ex_storage =Environment.getExternalStorageDirectory().getAbsolutePath();
+        // Get Absolute Path in External Sdcard
+        String split1[] = uri.split("_");
+        String split[] = split1[1].split("[.]");
+        FileName = split[0];
+
+        String folder = Environment.getExternalStorageDirectory() + File.separator+ "pola" + "/";
+        String file = "pola_" + FileName + "_" + getDateString() + ".jpg";
+        Toast.makeText(DecoActivity.this, file, Toast.LENGTH_LONG).show();
+        File file_path;
+        try{
+            file_path = new File(folder);
+            if(!file_path.isDirectory()){
+                file_path.mkdirs();
+            }
+
+            FileOutputStream out = new FileOutputStream(folder+file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://"+ folder + file)));
+
+            out.close();
+
+            Intent intent = new Intent(getApplicationContext(), GalleryActivity.class);
+            Toast.makeText(DecoActivity.this, "저장하였습니다.", Toast.LENGTH_LONG).show();
+            startActivity(intent);
+
+        }catch(FileNotFoundException exception){
+            Log.e("FileNotFoundException", exception.getMessage());
+        }catch(IOException exception){
+            Log.e("IOException", exception.getMessage());
+        }
+
+    }
+    public String getDateString()
+    {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.KOREA);
+        String str_date = df.format(new Date());
+
+        return str_date;
+    }
+}
 
 /*
     float oldXvalue;
@@ -237,7 +293,7 @@ public class DecoActivity extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
 */
-}
+
 /*
         이미지뷰에 있는 거 저장하는 코드
         BitmapDrawable d = (BitmapDrawable)((ImageView) findViewById(R.id.imageView)).getDrawable();

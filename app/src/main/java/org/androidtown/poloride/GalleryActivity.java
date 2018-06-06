@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -51,10 +52,9 @@ public class GalleryActivity extends AppCompatActivity {
 
         for(int i=0; i< list.size(); i++) {
             ImageView imageView = new ImageView(this);
-            imageView.setPadding(40, 40, 40, 40);
+
             imageView.setAdjustViewBounds(true);
             Log.v( "Gallery" ,"IMAGEPARAM1: "+ layout.getHeight());
-
 
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -84,6 +84,10 @@ public class GalleryActivity extends AppCompatActivity {
                 Integer height = Integer.parseInt( exif.getAttribute(ExifInterface.TAG_IMAGE_LENGTH) );
 
                 LinearLayout.LayoutParams Params = new LinearLayout.LayoutParams(width, height);
+
+                Params.leftMargin = 210;
+                Params.rightMargin = 210;
+
                 imageView.setLayoutParams(Params);
 
 

@@ -315,8 +315,12 @@ public class MainActivity extends AppCompatActivity {
             matrix.postRotate(orientation);
             CameraBitmap =  Bitmap.createBitmap(CameraBitmap, 0, 0, w, h, matrix, true);
 
-            CameraBitmap = resizeBitmap(CameraBitmap, 500);
+            CameraBitmap = resizeBitmap(CameraBitmap, 510);
             Bitmap resultBitmap = combineImages(CameraBitmap);
+
+            Toast.makeText(MainActivity.this,String.valueOf(CameraBitmap.getWidth())
+                    + String.valueOf(CameraBitmap.getHeight())
+                    , Toast.LENGTH_LONG).show();
 
             if (resultBitmap == null){
                 return;
@@ -324,6 +328,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "저장하였습니다", Toast.LENGTH_LONG).show();
                 camera.startPreview();
             }
+
 
             camera.stopPreview();
             Intent intent = new Intent(getApplicationContext(), EditGalleryActivity.class);
@@ -340,7 +345,7 @@ public class MainActivity extends AppCompatActivity {
 
         double aspectRatio = (double) original.getHeight() / (double) original.getWidth();
         int targetHeight = (int) (resizeWidth * aspectRatio);
-        Bitmap result = Bitmap.createScaledBitmap(original, resizeWidth, targetHeight, false);
+        Bitmap result = Bitmap.createScaledBitmap(original, resizeWidth, 680, false);
         if (result != original) {
             original.recycle();
         }
@@ -358,10 +363,10 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i("DEBUG", "width = " + width + ", height = " + height);
 
-        Bitmap result = Bitmap.createBitmap(width+110, height+280, cameraFrame.getConfig());
+        Bitmap result = Bitmap.createBitmap(width+130, height+344, cameraFrame.getConfig());
         Canvas canvas = new Canvas(result);
         canvas.drawBitmap(cameraFrame, 0f, 0f, null);
-        canvas.drawBitmap(cameraBitmap, 55, 100, null);
+        canvas.drawBitmap(cameraBitmap, 65, 120, null);
 
         saveBitmaptoJpeg(result);
         return result;

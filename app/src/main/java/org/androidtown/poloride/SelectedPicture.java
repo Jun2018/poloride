@@ -35,6 +35,7 @@ public class SelectedPicture extends AppCompatActivity {
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         imageView.setImageBitmap(image);
 
+
         /*
         Intent intent = getIntent();
         uri = intent.getStringExtra("Data");
