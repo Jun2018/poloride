@@ -5,7 +5,7 @@
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4A90E2">
+    android:background="#F5E8DC">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -24,22 +24,20 @@
 
         <Button
             android:id="@+id/btnCapture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="292dp"
-            android:text="캡처"
+            android:background="@drawable/btn_capture"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.028"
+            app:layout_constraintHorizontal_bias="0.138"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.894" />
+            app:layout_constraintVertical_bias="0.64" />
 
         <SurfaceView
             android:id="@+id/surfaceView"
@@ -54,18 +52,20 @@
 
         <Button
             android:id="@+id/btnGallery"
-            android:layout_width="84dp"
+            android:layout_width="91dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="464dp"
-            android:layout_marginRight="8dp"
             android:layout_marginStart="464dp"
             android:layout_marginTop="8dp"
-            android:text="갤러리"
+            android:elevation="0dp"
+            android:text="Gallery"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
+
             app:layout_constraintTop_toTopOf="parent" />
+
+
 
         <Button
             android:id="@+id/btnFlash"
