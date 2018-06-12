@@ -318,10 +318,6 @@ public class MainActivity extends AppCompatActivity {
             CameraBitmap = resizeBitmap(CameraBitmap, 510);
             Bitmap resultBitmap = combineImages(CameraBitmap);
 
-            Toast.makeText(MainActivity.this,String.valueOf(CameraBitmap.getWidth())
-                    + String.valueOf(CameraBitmap.getHeight())
-                    , Toast.LENGTH_LONG).show();
-
             if (resultBitmap == null){
                 return;
             } else {

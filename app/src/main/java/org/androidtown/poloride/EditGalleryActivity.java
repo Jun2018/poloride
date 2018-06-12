@@ -24,6 +24,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Handler;
+
+
 
 public class EditGalleryActivity extends Activity implements SensorEventListener{
     private long lastTime;
@@ -42,7 +47,13 @@ public class EditGalleryActivity extends Activity implements SensorEventListener
     private Sensor accelerormeterSensor;
 
     private TextView textview=null;
-    private int count;
+    private int count = 0;
+
+    private TextView textView;
+    private Timer timer;
+
+    private final android.os.Handler handler = new android.os.Handler();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +84,30 @@ public class EditGalleryActivity extends Activity implements SensorEventListener
         paint.setAlpha(250);
         ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
 
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                update();
+            }
+        };
+
+        timer = new Timer();
+        timer.schedule(timerTask, 0, 1000);
+    }
+
+    private void update(){
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if(count>30){
+                    Toast.makeText(EditGalleryActivity.this, "완료되었습니다.", Toast.LENGTH_LONG).show();
+                    timer.cancel();
+                }else{
+                    count++;
+                }
+            }
+        };
+        handler.post(runnable);
     }
 
     @Override

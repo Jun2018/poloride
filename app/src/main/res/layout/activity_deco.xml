@@ -36,8 +36,8 @@
 
     <LinearLayout
         android:id="@+id/llCanvas"
-        android:layout_width="288dp"
-        android:layout_height="460.8dp"
+        android:layout_width="640px"
+        android:layout_height="1024px"
         android:layout_weight="1"
         android:background="#00ffffff"
         android:orientation="vertical"

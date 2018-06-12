@@ -181,6 +181,8 @@ public class GalleryActivity extends AppCompatActivity {
         return a;
     }
     public void onBackButtonClicked(View v) {
-        finish();
+
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
     }
 }

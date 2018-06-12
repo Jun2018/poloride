@@ -8,12 +8,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -27,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.io.Console;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -52,28 +55,42 @@ public class DecoActivity extends AppCompatActivity {
     private Bitmap result = null;
 
     private Canvas  canvas = null;
+    private Path path = null;
 
     private Paint   DrawPaint = null;
     private float   backX = 0.0f;
     private float   backY = 0.0f;
 
+    Typeface mfont;
+
     private ImageView imageView = null;
     private View.OnTouchListener touchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent event) {
-            float[] location = getImageViewLocation((ImageView)view, event);
-            float x = location[0];
-            float y = location[1];
+            ImageView imageView = (ImageView)view;
+            Rect bounds = imageView.getDrawable().getBounds();
+
+            float[] location = getImageViewLocation(imageView, event);
+
+            float x = event.getX() + bounds.left / 2 + 20;
+            float y = event.getY() + bounds.top / 2 + 20;
+            Log.d("X : ", String.valueOf(event.getX()));
+            Log.d("Y : ", String.valueOf(event.getY()));
+            Log.d("View X : ", String.valueOf(view.getWidth()));
+            Log.d("View Y : ", String.valueOf(view.getHeight()));
 
             switch (event.getAction() & MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_DOWN:
+                    path.reset();
+                    path.moveTo(x, y);
                     canvas.drawPoint(x, y, DrawPaint);
                     backX = x;
                     backY = y;
                     imageView.invalidate();
                     return true;
                 case MotionEvent.ACTION_MOVE:
-                    canvas.drawLine(backX, backY, x, y, DrawPaint);
+                    path.quadTo(backX, backY, x, y);
+                    canvas.drawPath(path, DrawPaint);
                     backX = x;
                     backY = y;
                     imageView.invalidate();
@@ -121,6 +138,8 @@ public class DecoActivity extends AppCompatActivity {
         canvas = new Canvas(result);
         canvas.drawBitmap(image, 0f, 0f, null);
 
+        path = new Path();
+
         editText = (EditText) findViewById(R.id.text);
 
         Button btn_InputDate = (Button) findViewById(R.id.btnInputdate);
@@ -166,13 +185,14 @@ public class DecoActivity extends AppCompatActivity {
 
                         inputString = editText.getText().toString();
 
-                        int timeColor = getResources().getColor(R.color.colorTime);
+                        mfont = Typeface.createFromAsset(getAssets(),"font_papyrus.ttf");
 
                         Paint paint = new Paint();
                         paint.setTextSize(90);
                         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-                        paint.setColor(timeColor);
+                        paint.setColor(Color.BLACK);
                         paint.setStyle(Paint.Style.FILL);
+                        paint.setTypeface(mfont);
 
 
                         canvas.drawText(inputString, 80f, 935f, paint);
@@ -276,7 +296,7 @@ public class DecoActivity extends AppCompatActivity {
     float[] getImageViewLocation(ImageView view, MotionEvent event)
     {
         int index = event.getActionIndex();
-        float[] result = new float[] { event.getX(index), event.getY(index) };
+        float[] result = new float[] { event.getX(), event.getY() };
 
         Matrix matrix = new Matrix();
         view.getImageMatrix().invert(matrix);
