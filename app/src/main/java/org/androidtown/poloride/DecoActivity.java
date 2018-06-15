@@ -121,14 +121,6 @@ public class DecoActivity extends AppCompatActivity {
         height = image.getHeight();
         result = Bitmap.createBitmap(width, height, image.getConfig());
 
-
-   /*
-        bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
-        imageviewBitmap = bitmapDrawable.getBitmap();
-        width = imageviewBitmap.getWidth();
-        height = imageviewBitmap.getHeight();
-        result = Bitmap.createBitmap(width, height, imageviewBitmap.getConfig());
-*/
         canvas = new Canvas(result);
         canvas.drawBitmap(image, 0f, 0f, null);
 
@@ -243,6 +235,17 @@ public class DecoActivity extends AppCompatActivity {
 
             }
         });
+
+        final Button btn_filter = (Button) findViewById(R.id.btnFilter);
+        btn_filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bitmap filterBitmap = changeToOld(result);
+                canvas.drawBitmap(filterBitmap, 0f, 0f, null);
+
+                imageView.setImageBitmap(result);
+            }
+        });
     }
 
 
@@ -287,16 +290,39 @@ public class DecoActivity extends AppCompatActivity {
 
         return str_date;
     }
-    float[] getImageViewLocation(ImageView view, MotionEvent event)
-    {
-        int index = event.getActionIndex();
-        float[] result = new float[] { event.getX(), event.getY() };
 
-        Matrix matrix = new Matrix();
-        view.getImageMatrix().invert(matrix);
-        matrix.postTranslate(view.getScrollX(), view.getScrollY());
-        matrix.mapPoints(result);
 
-        return result;
-    }
+    public static Bitmap changeToOld(Bitmap bitmap) {
+
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int pixColor = 0;
+        int pixR = 0;
+        int pixG = 0;
+        int pixB = 0;
+        int newR = 0;
+        int newG = 0;
+        int newB = 0;
+        int[] pixels = new int[width * height];
+        bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
+        for (int i = 120; i < height-224; i++)
+        {
+            for (int k = 65; k < width-65; k++)
+            {
+                pixColor = pixels[width * i + k];
+                pixR = Color.red(pixColor);
+                pixG = Color.green(pixColor);
+                pixB = Color.blue(pixColor);
+                newR = (int) (0.393 * pixR + 0.769 * pixG + 0.189 * pixB);
+                newG = (int) (0.349 * pixR + 0.686 * pixG + 0.168 * pixB);
+                newB = (int) (0.272 * pixR + 0.534 * pixG + 0.131 * pixB);
+                int newColor = Color.argb(255, newR > 255 ? 255 : newR, newG > 255 ? 255 : newG, newB > 255 ? 255 : newB);
+                pixels[width * i + k] = newColor;
+            }
+        }
+
+        Bitmap returnBitmap = Bitmap.createBitmap(pixels, width, height, Bitmap.Config.ARGB_8888);
+        return returnBitmap;
+	}
+
 }

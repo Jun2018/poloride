@@ -357,6 +357,7 @@ public class MainActivity extends AppCompatActivity {
         width = cameraBitmap.getWidth();
         height = cameraBitmap.getHeight();
 
+
         Log.i("DEBUG", "width = " + width + ", height = " + height);
 
         Bitmap result = Bitmap.createBitmap(width+130, height+344, cameraFrame.getConfig());
