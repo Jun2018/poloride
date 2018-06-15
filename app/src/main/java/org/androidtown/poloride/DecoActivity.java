@@ -68,16 +68,9 @@ public class DecoActivity extends AppCompatActivity {
         @Override
         public boolean onTouch(View view, MotionEvent event) {
             ImageView imageView = (ImageView)view;
-            Rect bounds = imageView.getDrawable().getBounds();
 
-            float[] location = getImageViewLocation(imageView, event);
-
-            float x = event.getX() + bounds.left / 2 + 20;
-            float y = event.getY() + bounds.top / 2 + 20;
-            Log.d("X : ", String.valueOf(event.getX()));
-            Log.d("Y : ", String.valueOf(event.getY()));
-            Log.d("View X : ", String.valueOf(view.getWidth()));
-            Log.d("View Y : ", String.valueOf(view.getHeight()));
+            float x = event.getX() / (imageView.getWidth() / 640f);
+            float y = event.getY() / (imageView.getHeight() / 1024f);
 
             switch (event.getAction() & MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_DOWN:
@@ -127,6 +120,7 @@ public class DecoActivity extends AppCompatActivity {
         width = image.getWidth();
         height = image.getHeight();
         result = Bitmap.createBitmap(width, height, image.getConfig());
+
 
    /*
         bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
