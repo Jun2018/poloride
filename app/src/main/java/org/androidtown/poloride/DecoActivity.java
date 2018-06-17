@@ -240,10 +240,14 @@ public class DecoActivity extends AppCompatActivity {
         btn_filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bitmap filterBitmap = changeToOld(result);
-                canvas.drawBitmap(filterBitmap, 0f, 0f, null);
+//                Bitmap filterBitmap = changeToOld(result);
+//                canvas.drawBitmap(filterBitmap, 0f, 0f, null);
+//
+//                imageView.setImageBitmap(result);
 
-                imageView.setImageBitmap(result);
+                Intent intent = new Intent(getApplicationContext(), FilterActivity.class);
+                intent.putExtra("URI", uri);
+                startActivity(intent);
             }
         });
     }
