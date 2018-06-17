@@ -5,5 +5,11 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorTime">#FF6050</color>
     <color name="colorBackground">#F5E8DC</color>
-    <color name="drawColor">#00ffffff</color>
+
+    <color name="color_option_menu">#FF3990</color>
+    <color name="filter_label_normal">#8A8889</color>
+
+    <color name="thumb_background_color">#000000</color>
+    <color name="zomato_red">#a40100</color>
+    <color name="placeholder_background">#222322</color>
 </resources>

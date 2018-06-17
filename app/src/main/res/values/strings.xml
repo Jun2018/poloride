@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">Poloride</string>
     <string name="back">돌아가기</string>
+    <string name="activity_title_main">Filters</string>
+
+    <string name="tab_filters">FILTERS</string>
+    <string name="tab_edit">EDIT</string>
+
+
+    <string name="roboto_medium">sans-serif-medium</string>
+    <string name="filter_normal">Normal</string>
+    <string name="action_save">SAVE</string>
+    <string name="action_open">OPEN</string>
+    <string name="title_activity_fragment">Fragment</string>
 </resources>
