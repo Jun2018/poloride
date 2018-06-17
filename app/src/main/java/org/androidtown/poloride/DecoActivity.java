@@ -61,7 +61,8 @@ public class DecoActivity extends AppCompatActivity {
     private float   backX = 0.0f;
     private float   backY = 0.0f;
 
-    Typeface mfont;
+    Typeface input_font;
+    Typeface time_font;
 
     private ImageView imageView = null;
     private View.OnTouchListener touchListener = new View.OnTouchListener() {
@@ -134,17 +135,18 @@ public class DecoActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 SimpleDateFormat df = new SimpleDateFormat("yy  MM  dd", Locale.KOREA);
-                String strTime = df.format(new Date());
+                String strTime = "`"+df.format(new Date());
 
                 int timeColor = getResources().getColor(R.color.colorTime);
 
+                time_font = Typeface.createFromAsset(getAssets(),"font_digital.ttf");
                 Paint tPaint = new Paint();
-                tPaint.setTextSize(30);
+                tPaint.setTextSize(25);
                 tPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
                 tPaint.setColor(timeColor);
                 tPaint.setStyle(Paint.Style.FILL);
-
-                canvas.drawText(strTime, 420f, 770f, tPaint);
+                tPaint.setTypeface(time_font);
+                canvas.drawText(strTime, 455f, 775f, tPaint);
 
                 //Drawable drawable = new BitmapDrawable(result);
 
@@ -171,14 +173,14 @@ public class DecoActivity extends AppCompatActivity {
 
                         inputString = editText.getText().toString();
 
-                        mfont = Typeface.createFromAsset(getAssets(),"font_papyrus.ttf");
+                        input_font = Typeface.createFromAsset(getAssets(),"font_papyrus.ttf");
 
                         Paint paint = new Paint();
                         paint.setTextSize(90);
                         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
                         paint.setColor(Color.BLACK);
                         paint.setStyle(Paint.Style.FILL);
-                        paint.setTypeface(mfont);
+                        paint.setTypeface(input_font);
 
 
                         canvas.drawText(inputString, 80f, 935f, paint);
