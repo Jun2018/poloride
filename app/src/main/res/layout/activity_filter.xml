@@ -29,7 +29,7 @@
         android:layout_marginRight="25dp"
         android:fontFamily="@font/bungee_shade"
         android:onClick="onSaveButtonClicked"
-        android:text="저장" />
+        android:text="적용" />
 
     <ImageView
         android:id="@+id/place_holder_imageview"

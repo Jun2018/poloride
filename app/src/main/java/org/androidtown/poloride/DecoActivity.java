@@ -54,7 +54,8 @@ public class DecoActivity extends AppCompatActivity {
     private int width = 0;
     private int height = 0;
     private Bitmap result = null;
-
+    private byte[] arr = null;
+    private Bitmap image = null;
     private Canvas  canvas = null;
     private Path path = null;
 
@@ -112,12 +113,15 @@ public class DecoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         uri = intent.getStringExtra("URI");
+        arr = getIntent().getByteArrayExtra("image");
 
-        //uri를 이미지로 변경하여
-        Bitmap image = BitmapFactory.decodeFile(uri);
+        if(arr==null){
+            image = BitmapFactory.decodeFile(uri);
+        }else if(arr != null){
+            image = BitmapFactory.decodeByteArray(arr, 0, arr.length);
+        }
         imageView = (ImageView) findViewById(R.id.imageView);
         imageView.setImageBitmap(image);
-
 
         width = image.getWidth();
         height = image.getHeight();
@@ -205,6 +209,23 @@ public class DecoActivity extends AppCompatActivity {
                     editText.setEnabled(false);
                 }
 
+            }
+        });
+
+        final Button btn_filter = (Button)findViewById(R.id.btnFilter);
+        btn_filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BitmapDrawable d = (BitmapDrawable) ((ImageView) findViewById(R.id.imageView)).getDrawable();
+                Bitmap b = d.getBitmap();
+
+                Intent intent = new Intent(getApplicationContext(), FilterActivity.class);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                b.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                intent.putExtra("imageViewByte",byteArray);
+                intent.putExtra("URI", uri);
+                startActivity(intent);
             }
         });
 

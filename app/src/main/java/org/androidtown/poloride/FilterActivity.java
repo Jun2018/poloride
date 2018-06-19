@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.zomato.photofilters.FilterPack;
 import com.zomato.photofilters.imageprocessors.Filter;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -67,9 +68,11 @@ public class FilterActivity extends AppCompatActivity implements ThumbnailCallba
 //        drawable = R.drawable.dog;
 
         Intent intent = getIntent();
+
+        byte[] arr = getIntent().getByteArrayExtra("imageViewByte");
         uri = intent.getStringExtra("URI");
-        image = cropBitmap(BitmapFactory.decodeFile(uri));
-        nocropImage= BitmapFactory.decodeFile(uri);
+        nocropImage= BitmapFactory.decodeByteArray(arr, 0, arr.length);;
+        image = cropBitmap(nocropImage);
         Log.v("initUIWidgets", uri);
 
         initUIWidgets();
@@ -80,7 +83,7 @@ public class FilterActivity extends AppCompatActivity implements ThumbnailCallba
         placeHolderImageView = (ImageView) findViewById(R.id.place_holder_imageview);
 //        placeHolderImageView.setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(this.getApplicationContext().getResources(), drawable), 640, 640, false));
 
-        image = cropBitmap(BitmapFactory.decodeFile(uri));
+        image = cropBitmap(nocropImage);
 //
         Bitmap result = Bitmap.createBitmap(640, 1024, nocropImage.getConfig());
         Canvas canvas = new Canvas(result);
@@ -156,7 +159,17 @@ public class FilterActivity extends AppCompatActivity implements ThumbnailCallba
     public void onSaveButtonClicked(View v) {
 
         Bitmap filterBitmap = combineFrame(filteredImage);
-        saveBitmaptoJpeg(filterBitmap);
+
+
+        Intent intent = new Intent(getApplicationContext(), DecoActivity.class);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        filterBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        intent.putExtra("image",byteArray);
+        intent.putExtra("URI", uri);
+        startActivity(intent);
+
+       // saveBitmaptoJpeg(filterBitmap);
     }
 
     public Bitmap combineFrame(Bitmap saveBitmap) {
@@ -166,11 +179,11 @@ public class FilterActivity extends AppCompatActivity implements ThumbnailCallba
         Bitmap result = Bitmap.createBitmap(640, 1024, nocropImage.getConfig());
         Canvas canvas = new Canvas(result);
         canvas.drawBitmap(nocropImage, 0f, 0f, null);
-        canvas.drawBitmap(b, 0, 0, null);
+        canvas.drawBitmap(saveBitmap, 65, 120, null);
 
         return result;
     }
-
+/*
     public void saveBitmaptoJpeg(Bitmap saveBitmap) {
         //    String ex_storage =Environment.getExternalStorageDirectory().getAbsolutePath();
         // Get Absolute Path in External Sdcard
@@ -212,16 +225,17 @@ public class FilterActivity extends AppCompatActivity implements ThumbnailCallba
 
         return str_date;
     }
-
+*/
     static public Bitmap cropBitmap(Bitmap original) {
         Bitmap result = Bitmap.createBitmap(original
                 , 65 //X 시작위치 (원본의 4/1지점)
                 , 120 //Y 시작위치 (원본의 4/1지점)
                 , 510 // 넓이 (원본의 절반 크기)
                 , 680); // 높이 (원본의 절반 크기)
+       /*
         if (result != original) {
             original.recycle();
-        }
+        }*/
         return result;
     }
 

@@ -68,16 +68,6 @@ public class SelectedPicture extends AppCompatActivity {
             }
         });
 
-        final Button btn_filter = (Button)findViewById(R.id.btnFilter);
-        btn_filter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(getApplicationContext(), FilterActivity.class);
-                intent.putExtra("URI", uri);
-                startActivity(intent);
-            }
-        });
 
         final Button btn_del = (Button)findViewById(R.id.btn_del);
         btn_del.setOnClickListener(new View.OnClickListener() {
