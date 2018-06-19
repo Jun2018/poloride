@@ -20,6 +20,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,10 +49,13 @@ public class EditGalleryActivity extends Activity implements SensorEventListener
 
     private TextView textview=null;
     private int count = 0;
-
+    private int saveCount = 0;
     private TextView textView;
     private Timer timer;
 
+    ProgressBar progress;
+
+    Paint paint = new Paint();
     private final android.os.Handler handler = new android.os.Handler();
 
 
@@ -77,9 +81,9 @@ public class EditGalleryActivity extends Activity implements SensorEventListener
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerormeterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        progress = (ProgressBar) findViewById(R.id.progress) ;
 
 
-        Paint paint = new Paint();
         paint.setColor(Color.WHITE);
         paint.setAlpha(250);
         ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
@@ -103,6 +107,7 @@ public class EditGalleryActivity extends Activity implements SensorEventListener
                     Toast.makeText(EditGalleryActivity.this, "완료되었습니다.", Toast.LENGTH_LONG).show();
                     timer.cancel();
                 }else{
+                    progress.setProgress(count);
                     count++;
                 }
             }
@@ -144,39 +149,130 @@ public class EditGalleryActivity extends Activity implements SensorEventListener
                 speed = Math.abs(x + y + z - lastX - lastY - lastZ) / gabOfTime * 10000;
 
                 if (speed > SHAKE_THRESHOLD) { // SHAKE_THRESHOLD : 속도가 얼마 이상일 때, 흔듬을 감지하겠다는 것을 설정
-                    textview = (TextView)findViewById(R.id.mainTextView);
-                    textview.setText(Integer.toString(++count));
+                    progress.setProgress(count);
+                    count++;
+
                 }
 
-                Paint paint = new Paint();
+
                 switch (count){
+                    case 1:
+                        paint.setAlpha(242);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 2:
+                        paint.setAlpha(234);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 3:
+                        paint.setAlpha(226);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 4:
+                        paint.setAlpha(218);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
                     case 5:
-                        paint.setColor(Color.WHITE);
-                        paint.setAlpha(215);
+                        paint.setAlpha(210);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 6:
+                        paint.setAlpha(202);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 7:
+                        paint.setAlpha(194);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 8:
+                        paint.setAlpha(186);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 9:
+                        paint.setAlpha(178);
                         ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
                         break;
                     case 10:
-                        paint.setColor(Color.WHITE);
-                        paint.setAlpha(175);
+                        paint.setAlpha(170);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 11:
+                        paint.setAlpha(161);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 12:
+                        paint.setAlpha(152);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 13:
+                        paint.setAlpha(143);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 14:
+                        paint.setAlpha(134);
                         ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
                         break;
                     case 15:
-                        paint.setColor(Color.WHITE);
-                        paint.setAlpha(135);
+                        paint.setAlpha(125);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 16:
+                        paint.setAlpha(116);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 17:
+                        paint.setAlpha(107);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 18:
+                        paint.setAlpha(98);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 19:
+                        paint.setAlpha(89);
                         ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
                         break;
                     case 20:
-                        paint.setColor(Color.WHITE);
-                        paint.setAlpha(95);
+                        paint.setAlpha(80);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 21:
+                        paint.setAlpha(72);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 22:
+                        paint.setAlpha(64);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 23:
+                        paint.setAlpha(56);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 24:
+                        paint.setAlpha(48);
                         ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
                         break;
                     case 25:
-                        paint.setColor(Color.WHITE);
-                        paint.setAlpha(55);
+                        paint.setAlpha(40);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 26:
+                        paint.setAlpha(32);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 27:
+                        paint.setAlpha(24);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 28:
+                        paint.setAlpha(16);
+                        ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
+                        break;
+                    case 29:
+                        paint.setAlpha(8);
                         ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
                         break;
                     case 30:
-                        paint.setColor(Color.WHITE);
                         paint.setAlpha(0);
                         ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
                         break;

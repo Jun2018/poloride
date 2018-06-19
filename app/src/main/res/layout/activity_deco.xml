@@ -20,33 +20,6 @@
         app:layout_constraintVertical_bias="0.493" />
 
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="288dp"
-        android:layout_height="460.8dp"
-        android:adjustViewBounds="false"
-        android:contentDescription="TODO"
-        android:background="#00ffffff"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.493" />
-
-    <LinearLayout
-        android:id="@+id/llCanvas"
-        android:layout_width="640px"
-        android:layout_height="1024px"
-        android:layout_weight="1"
-        android:background="#00ffffff"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.493" />
-
     <Button
         android:id="@+id/btnInputdate"
         android:layout_width="wrap_content"
@@ -73,7 +46,8 @@
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorBackground"
+        android:background="@android:color/transparent"
+        android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -100,20 +74,6 @@
         android:layout_marginTop="16dp"
         android:text="그리기"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnFilter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="필터"
-        app:layout_constraintEnd_toStartOf="@+id/btnSave"
-        app:layout_constraintStart_toEndOf="@+id/btnDraw"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

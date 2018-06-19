@@ -29,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.Console;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -134,8 +135,15 @@ public class DecoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                SimpleDateFormat df = new SimpleDateFormat("yy  MM  dd", Locale.KOREA);
-                String strTime = "`"+df.format(new Date());
+                String split1[] = uri.split("_");
+                String split[] = split1[1].split("-");
+                String yearSplit[] = split[0].split("0");
+
+                String year = yearSplit[1];
+                String month = split[1];
+                String day = split[2];
+
+                String strTime = "`"+ year + "  " + month+ "  "+day+ "  ";
 
                 int timeColor = getResources().getColor(R.color.colorTime);
 
@@ -161,9 +169,11 @@ public class DecoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 btnState++;
+                input_font = Typeface.createFromAsset(getAssets(),"font_papyrus.ttf");
                 if (btnState == 1) {
                     btn_inputfont.setText("입력완료");
                     editText.setHint("문자를 입력하세요");
+                    editText.setTypeface(input_font);
                     editText.setHintTextColor(Color.RED);
                     editText.setEnabled(true);
                 }
@@ -173,7 +183,7 @@ public class DecoActivity extends AppCompatActivity {
 
                         inputString = editText.getText().toString();
 
-                        input_font = Typeface.createFromAsset(getAssets(),"font_papyrus.ttf");
+
 
                         Paint paint = new Paint();
                         paint.setTextSize(90);
@@ -222,7 +232,7 @@ public class DecoActivity extends AppCompatActivity {
                     DrawPaint = new Paint();
                     DrawPaint.setColor(Color.BLACK);
                     DrawPaint.setAlpha(255);
-                    DrawPaint.setStrokeWidth(5);
+                    DrawPaint.setStrokeWidth(3);
                     DrawPaint.setStrokeJoin(Paint.Join.ROUND);
                     DrawPaint.setStyle(Paint.Style.STROKE);
                     DrawPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -237,7 +247,7 @@ public class DecoActivity extends AppCompatActivity {
 
             }
         });
-
+/*
         final Button btn_filter = (Button) findViewById(R.id.btnFilter);
         btn_filter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -247,11 +257,14 @@ public class DecoActivity extends AppCompatActivity {
 //
 //                imageView.setImageBitmap(result);
 
+
                 Intent intent = new Intent(getApplicationContext(), FilterActivity.class);
                 intent.putExtra("URI", uri);
                 startActivity(intent);
+
             }
         });
+*/
     }
 
 

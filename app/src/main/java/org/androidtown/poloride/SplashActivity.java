@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 public class SplashActivity extends AppCompatActivity {
+
     private Handler handler;
     Runnable runnable = new Runnable() {
         @Override
@@ -27,6 +28,8 @@ public class SplashActivity extends AppCompatActivity {
                 android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         setContentView(R.layout.activity_splash2);
+
+
         init();
 
         handler.postDelayed(runnable, 3000);

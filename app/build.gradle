@@ -16,6 +16,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets { main { jni.srcDirs = ['src/main/jni', 'src/main/jni/'] } }
 }
 
 dependencies {
@@ -31,13 +32,13 @@ dependencies {
     implementation 'com.github.ksoichiro:android-observablescrollview:1.5.2'
     //
     implementation 'info.androidhive:imagefilters:1.0.7'
-    compile 'com.nineoldandroids:library:2.4.0'
+    implementation 'com.nineoldandroids:library:2.4.0'
 
     // butter knife
-    compile 'com.jakewharton:butterknife:8.8.1'
+    implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     // dexter M permissions
-    compile 'com.karumi:dexter:4.1.0'
+    implementation 'com.karumi:dexter:4.1.0'
 
 }

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -45,20 +47,29 @@ public class FilterActivity extends AppCompatActivity implements ThumbnailCallba
     int drawable;
     String uri;
     Bitmap image;
+    Bitmap nocropImage;
     Bitmap filteredImage;
     String FileName = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
+                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+
         setContentView(R.layout.activity_filter);
         activity = this;
 //        drawable = R.drawable.dog;
 
         Intent intent = getIntent();
         uri = intent.getStringExtra("URI");
-        image = BitmapFactory.decodeFile(uri);
-
+        image = cropBitmap(BitmapFactory.decodeFile(uri));
+        nocropImage= BitmapFactory.decodeFile(uri);
         Log.v("initUIWidgets", uri);
 
         initUIWidgets();
@@ -69,9 +80,14 @@ public class FilterActivity extends AppCompatActivity implements ThumbnailCallba
         placeHolderImageView = (ImageView) findViewById(R.id.place_holder_imageview);
 //        placeHolderImageView.setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(this.getApplicationContext().getResources(), drawable), 640, 640, false));
 
-        image = BitmapFactory.decodeFile(uri);
+        image = cropBitmap(BitmapFactory.decodeFile(uri));
 //
-        placeHolderImageView.setImageBitmap(image);
+        Bitmap result = Bitmap.createBitmap(640, 1024, nocropImage.getConfig());
+        Canvas canvas = new Canvas(result);
+        canvas.drawBitmap(nocropImage, 0f, 0f, null);
+        canvas.drawBitmap(image, 65, 120, null);
+
+        placeHolderImageView.setImageBitmap(result);
 
         initHorizontalList();
     }
@@ -122,7 +138,14 @@ public class FilterActivity extends AppCompatActivity implements ThumbnailCallba
 //        placeHolderImageView.setImageBitmap(filter.processFilter(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(this.getApplicationContext().getResources(), drawable), 640, 640, false)));
         filteredImage = image.copy(Bitmap.Config.ARGB_8888, true);
         // preview filtered image
-        placeHolderImageView.setImageBitmap(filter.processFilter(filteredImage));
+        Bitmap filterImage = filter.processFilter(filteredImage);
+
+        Bitmap result = Bitmap.createBitmap(640, 1024, nocropImage.getConfig());
+        Canvas canvas = new Canvas(result);
+        canvas.drawBitmap(nocropImage, 0f, 0f, null);
+        canvas.drawBitmap(filterImage, 65, 120, null);
+
+        placeHolderImageView.setImageBitmap(result);
 
     }
 
@@ -132,7 +155,20 @@ public class FilterActivity extends AppCompatActivity implements ThumbnailCallba
 
     public void onSaveButtonClicked(View v) {
 
-        saveBitmaptoJpeg(filteredImage);
+        Bitmap filterBitmap = combineFrame(filteredImage);
+        saveBitmaptoJpeg(filterBitmap);
+    }
+
+    public Bitmap combineFrame(Bitmap saveBitmap) {
+        BitmapDrawable d = (BitmapDrawable) ((ImageView) findViewById(R.id.place_holder_imageview)).getDrawable();
+        Bitmap b = d.getBitmap();
+
+        Bitmap result = Bitmap.createBitmap(640, 1024, nocropImage.getConfig());
+        Canvas canvas = new Canvas(result);
+        canvas.drawBitmap(nocropImage, 0f, 0f, null);
+        canvas.drawBitmap(b, 0, 0, null);
+
+        return result;
     }
 
     public void saveBitmaptoJpeg(Bitmap saveBitmap) {
@@ -176,4 +212,17 @@ public class FilterActivity extends AppCompatActivity implements ThumbnailCallba
 
         return str_date;
     }
+
+    static public Bitmap cropBitmap(Bitmap original) {
+        Bitmap result = Bitmap.createBitmap(original
+                , 65 //X 시작위치 (원본의 4/1지점)
+                , 120 //Y 시작위치 (원본의 4/1지점)
+                , 510 // 넓이 (원본의 절반 크기)
+                , 680); // 높이 (원본의 절반 크기)
+        if (result != original) {
+            original.recycle();
+        }
+        return result;
+    }
+
 }
