@@ -1,5 +1,6 @@
 package org.androidtown.poloride;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,6 +42,7 @@ public class ThumbnailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         Log.v(TAG, "On Bind View Called");
         ThumbnailsViewHolder thumbnailsViewHolder = (ThumbnailsViewHolder) holder;
         thumbnailsViewHolder.thumbnail.setImageBitmap(thumbnailItem.image);
+        thumbnailsViewHolder.thumbnail.setBackgroundColor(Color.argb(0,0,0,0));
         thumbnailsViewHolder.thumbnail.setScaleType(ImageView.ScaleType.FIT_START);
         setAnimation(thumbnailsViewHolder.thumbnail, i);
         thumbnailsViewHolder.thumbnail.setOnClickListener(new View.OnClickListener() {

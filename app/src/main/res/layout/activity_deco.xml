@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gallery_back">
+    android:background="@drawable/back_le_bottom">
 
     <ImageView
         android:id="@+id/imageView"
@@ -39,7 +39,7 @@
         android:id="@+id/linearLayout_btn"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/thumb_background_color"
+        android:background="@android:color/transparent"
         android:orientation="horizontal"
         android:weightSum="5"
         app:layout_constraintBottom_toBottomOf="parent"

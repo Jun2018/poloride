@@ -91,7 +91,7 @@
         android:layout_height="@dimen/recycler_size"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:background="@color/thumb_background_color"
+        android:background="@color/Black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -103,7 +103,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/thumbnail_vertical_padding"
             android:layout_marginTop="@dimen/thumbnail_vertical_padding"
-            android:clipToPadding="false" />
+            android:clipToPadding="false"
+            android:background="@android:color/transparent"/>
 
     </RelativeLayout>
 

@@ -176,7 +176,7 @@ public class DecoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 btnState++;
-                input_font = Typeface.createFromAsset(getAssets(),"font_papyrus.ttf");
+                input_font = Typeface.createFromAsset(getAssets(),"font_ylee.ttf");
                 if (btnState==1) {
                     btn_inputfont.setBackgroundResource(R.drawable.font_icon_activ);
                     editText.setHint("문자를 입력하세요");
