@@ -203,7 +203,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         final Button btn_Flash = (Button)findViewById(R.id.btnFlash);
-        final ImageView image_flash = (ImageView)findViewById(R.id.flash_image);
         btn_Flash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -211,10 +210,10 @@ public class MainActivity extends AppCompatActivity {
 
                 if (!isFlashStatus) {
                     onFlash();
-                    image_flash.setImageResource(R.drawable.flash_on);
+                    btn_Flash.setBackgroundResource(R.drawable.icon_flash_on);
                 } else {
                     offFlash();
-                    image_flash.setImageResource(R.drawable.flash_off);
+                    btn_Flash.setBackgroundResource(R.drawable.icon_flash_off);
                 }
             }
         });

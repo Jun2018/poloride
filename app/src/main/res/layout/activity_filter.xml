@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/r"
-    android:background="@color/colorBackground">
+    android:background="@drawable/gallery_back">
 
     <LinearLayout
         android:id="@+id/linearLayout_btn"
@@ -24,8 +24,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="5dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:background="@drawable/back_icon_white"
@@ -59,11 +59,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="5dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
-            android:background="@drawable/check_icon"
+            android:background="@drawable/check"
             android:fontFamily="@font/bungee_shade"
             android:onClick="onSaveButtonClicked"
             app:layout_constraintEnd_toEndOf="parent"

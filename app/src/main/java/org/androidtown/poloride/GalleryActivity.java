@@ -43,7 +43,7 @@ public class GalleryActivity extends AppCompatActivity {
 
  //       final ImageView imageView2 = (ImageView)findViewById(R.id.imageView2);
 
-        layout.setBackgroundColor(backgroundColor);
+        layout.setBackgroundColor(Color.argb(0,0,0,0));
 
 //        list = imageReader(Environment.getExternalStorageDirectory());
         list = imageReader( new File(Environment.getExternalStorageDirectory() + File.separator+ "pola"));
