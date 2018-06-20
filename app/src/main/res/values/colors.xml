@@ -14,4 +14,7 @@
     <color name="thumb_background_color">#000000</color>
     <color name="zomato_red">#a40100</color>
     <color name="placeholder_background">#222322</color>
+
+    <color name="Beige">#eae1dc</color>
+    <color name="Brown">#5b2b15</color>
 </resources>
