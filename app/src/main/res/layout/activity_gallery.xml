@@ -8,14 +8,14 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/home_icon"
         android:fontFamily="@font/bungee_shade"
         android:onClick="onBackButtonClicked"
-        android:text="@string/back"
         app:layout_constraintBottom_toTopOf="@+id/horizontal_scroll"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

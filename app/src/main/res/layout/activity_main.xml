@@ -13,6 +13,7 @@
 
 
         <ImageView
+            android:id="@+id/imageView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/camera"
@@ -29,15 +30,16 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="292dp"
             android:background="@drawable/btn_capture"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.138"
+            app:layout_constraintHorizontal_bias="0.116"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.64" />
+            app:layout_constraintVertical_bias="0.579" />
 
         <SurfaceView
             android:id="@+id/surfaceView"
@@ -52,13 +54,13 @@
 
         <Button
             android:id="@+id/btnGallery"
-            android:layout_width="91dp"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="464dp"
             android:layout_marginTop="8dp"
+            android:background="@drawable/gallery_icon"
             android:elevation="0dp"
-            android:text="Gallery"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,17 +68,33 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-
-        <Button
+        <Switch
             android:id="@+id/btnFlash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="OFF"
+            android:layout_gravity="center"
+            android:layout_marginLeft="84dp"
+            android:layout_marginStart="84dp"
+            android:layout_marginTop="32dp"
+            android:rotation="-90"
+            android:textColor="#ff000000"
+            android:textSize="18dp"
+            android:thumb="@drawable/switch_thumb_selector"
+            android:track="@drawable/switch_track_selector"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/flash_image"
+            android:layout_width="55dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/flash_off"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>

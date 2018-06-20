@@ -44,7 +44,7 @@ public class DecoActivity extends AppCompatActivity {
 
     String uri = null;
     int btnState = 0;
-    int drawBtnState = 0;
+    boolean drawBtnState =false;
 
     String FileName = null;
     String inputString = null;
@@ -60,6 +60,7 @@ public class DecoActivity extends AppCompatActivity {
     private Path path = null;
 
     private Paint   DrawPaint = null;
+    private Paint   fontpaint = new Paint();
     private float   backX = 0.0f;
     private float   backY = 0.0f;
 
@@ -134,10 +135,12 @@ public class DecoActivity extends AppCompatActivity {
 
         editText = (EditText) findViewById(R.id.text);
 
-        Button btn_InputDate = (Button) findViewById(R.id.btnInputdate);
+        final Button btn_InputDate = (Button) findViewById(R.id.btnInputdate);
         btn_InputDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                btn_InputDate.setBackgroundResource(R.drawable.date_icon_finish);
 
                 String split1[] = uri.split("_");
                 String split[] = split1[1].split("-");
@@ -147,7 +150,7 @@ public class DecoActivity extends AppCompatActivity {
                 String month = split[1];
                 String day = split[2];
 
-                String strTime = "`"+ year + "  " + month+ "  "+day+ "  ";
+                String strTime = "'"+ year + "  " + month+ "  "+day+ "  ";
 
                 int timeColor = getResources().getColor(R.color.colorTime);
 
@@ -174,30 +177,28 @@ public class DecoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 btnState++;
                 input_font = Typeface.createFromAsset(getAssets(),"font_papyrus.ttf");
-                if (btnState == 1) {
-                    btn_inputfont.setText("입력완료");
+                if (btnState==1) {
+                    btn_inputfont.setBackgroundResource(R.drawable.font_icon_activ);
                     editText.setHint("문자를 입력하세요");
                     editText.setTypeface(input_font);
                     editText.setHintTextColor(Color.RED);
                     editText.setEnabled(true);
-                }
-                if (btnState == 2) {
-                    btn_inputfont.setText("적용됨");
+
+                }else if(btnState==2) {
+                    btn_inputfont.setBackgroundResource(R.drawable.font_icon_finish);
                     if (editText.getText().toString().length() != 0) {
 
                         inputString = editText.getText().toString();
 
 
-
-                        Paint paint = new Paint();
-                        paint.setTextSize(90);
-                        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-                        paint.setColor(Color.BLACK);
-                        paint.setStyle(Paint.Style.FILL);
-                        paint.setTypeface(input_font);
+                        fontpaint.setTextSize(90);
+                        fontpaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+                        fontpaint.setColor(Color.BLACK);
+                        fontpaint.setStyle(Paint.Style.FILL);
+                        fontpaint.setTypeface(input_font);
 
 
-                        canvas.drawText(inputString, 80f, 935f, paint);
+                        canvas.drawText(inputString, 80f, 935f, fontpaint);
 
                         //Drawable drawable = new BitmapDrawable(result);
 
@@ -243,10 +244,8 @@ public class DecoActivity extends AppCompatActivity {
         btn_draw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                drawBtnState++;
-                if(drawBtnState==1){
-                    btn_draw.setText("그리기 완료");
-
+                if(!drawBtnState){
+                    btn_draw.setBackgroundResource(R.drawable.draw_icon_activ);
                     imageView.setImageBitmap(result);
                     imageView.setOnTouchListener(touchListener);
 
@@ -259,11 +258,12 @@ public class DecoActivity extends AppCompatActivity {
                     DrawPaint.setStrokeCap(Paint.Cap.ROUND);
                     DrawPaint.setAntiAlias(true);
 
-                }
-                if(drawBtnState!=1){
-                    btn_draw.setText("적용됨");
+                    drawBtnState=true;
+                }else if(drawBtnState){
+                    btn_draw.setBackgroundResource(R.drawable.draw_icon);
                     imageView.setImageBitmap(result);
                     DrawPaint.setAlpha(0);
+                    drawBtnState=false;
                 }
 
             }

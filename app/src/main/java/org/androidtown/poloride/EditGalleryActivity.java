@@ -5,10 +5,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -85,7 +87,7 @@ public class EditGalleryActivity extends Activity implements SensorEventListener
 
 
         paint.setColor(Color.WHITE);
-        paint.setAlpha(250);
+        paint.setAlpha(255);
         ((LinearLayout)findViewById(R.id.AlphaLayout)).setBackgroundColor(paint.getColor());
 
         TimerTask timerTask = new TimerTask() {
@@ -96,7 +98,16 @@ public class EditGalleryActivity extends Activity implements SensorEventListener
         };
 
         timer = new Timer();
-        timer.schedule(timerTask, 0, 1000);
+        timer.schedule(timerTask, 0, 2000);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(count>30){
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     private void update(){
