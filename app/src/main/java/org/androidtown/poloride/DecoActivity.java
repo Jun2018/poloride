@@ -176,7 +176,7 @@ public class DecoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 btnState++;
-                input_font = Typeface.createFromAsset(getAssets(),"font_ylee.ttf");
+                input_font = Typeface.createFromAsset(getAssets(),"font_papyrus.ttf");
                 if (btnState==1) {
                     btn_inputfont.setBackgroundResource(R.drawable.font_icon_activ);
                     editText.setHint("문자를 입력하세요");
@@ -191,14 +191,14 @@ public class DecoActivity extends AppCompatActivity {
                         inputString = editText.getText().toString();
 
 
-                        fontpaint.setTextSize(90);
+                        fontpaint.setTextSize(70);
                         fontpaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
                         fontpaint.setColor(Color.BLACK);
                         fontpaint.setStyle(Paint.Style.FILL);
                         fontpaint.setTypeface(input_font);
 
 
-                        canvas.drawText(inputString, 80f, 935f, fontpaint);
+                        canvas.drawText(inputString, 75f, 925f, fontpaint);
 
                         //Drawable drawable = new BitmapDrawable(result);
 
