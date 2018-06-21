@@ -89,7 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:background="@android:color/transparent" />
-
+<!--
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -117,6 +117,7 @@
 
 
             </LinearLayout>
+          -->
         </LinearLayout>
 
 
@@ -132,18 +133,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-
         <Button
             android:id="@+id/btnCapture"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="292dp"
-            android:background="@drawable/btn_capture"
+            android:background="@drawable/shutter_noline"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.116"
