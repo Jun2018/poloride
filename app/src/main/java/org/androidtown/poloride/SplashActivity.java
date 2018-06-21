@@ -32,7 +32,7 @@ public class SplashActivity extends AppCompatActivity {
 
         init();
 
-        handler.postDelayed(runnable, 3000);
+        handler.postDelayed(runnable, 4000);
     }
     public void init() {
         handler = new Handler();

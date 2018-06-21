@@ -13,11 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:fontFamily="monospace"
+        android:fontFamily="serif"
         android:orientation="horizontal"
 
         android:text="POLORIDE"
@@ -33,10 +31,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
-        android:textColor="@color/Beige"
         android:text="#2018"
 
+        android:textColor="@color/Beige"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
