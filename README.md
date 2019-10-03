@@ -1,8 +1,12 @@
-# README #
+# Poloride 카메라 #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+포토 프린터를 이용하여 사진을 뽑았을 때 폴라로이드 필름처럼 보이게 하는 폴라로이드 카메라 어플 “POLORIDE”
 
-### What is this repository for? ###
+
+
+## 기능소개 ##
+
+### 1. 기능 소개 – 시작 화면, 아이콘 ###
 
 * Quick summary
 * Version
