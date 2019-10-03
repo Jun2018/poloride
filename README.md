@@ -13,28 +13,28 @@
 
 
 ### 1. 시작 화면, 아이콘 ###
-<img src="https://github.com/Jun2018/poloride/blob/master/mdImages/image01.png?raw=true" width="70%" height="70%">
+<img src="https://github.com/Jun2018/poloride/blob/master/doc/markdownImages/image01.png?raw=true" width="70%" height="70%">
 
 
 ### 2. 메인 화면 ###
-<img src="https://github.com/Jun2018/poloride/blob/master/mdImages/image02.png?raw=true" width="100%" height="100%">
+<img src="https://github.com/Jun2018/poloride/blob/master/doc/markdownImages/image02.png?raw=true" width="100%" height="100%">
 
 
 ### 3. 사진 표현 ###
-<img src="https://github.com/Jun2018/poloride/blob/master/mdImages/image03.png?raw=true" width="100%" height="100%">
+<img src="https://github.com/Jun2018/poloride/blob/master/doc/markdownImages/image03.png?raw=true" width="100%" height="100%">
 
 
 ### 4. 사진 선택 ###
-<img src="https://github.com/Jun2018/poloride/blob/master/mdImages/image04.png?raw=true" width="100%" height="100%">
+<img src="https://github.com/Jun2018/poloride/blob/master/doc/markdownImages/image04.png?raw=true" width="100%" height="100%">
 
 
 ### 5. 꾸미기 ###
-<img src="https://github.com/Jun2018/poloride/blob/master/mdImages/image05.png?raw=true" width="100%" height="100%">
+<img src="https://github.com/Jun2018/poloride/blob/master/doc/markdownImages/image05.png?raw=true" width="100%" height="100%">
 
 
 ### 6. 완성 사진 ###
-<img src="https://github.com/Jun2018/poloride/blob/master/mdImages/image06.png?raw=true" width="100%" height="100%">
+<img src="https://github.com/Jun2018/poloride/blob/master/doc/markdownImages/image06.png?raw=true" width="100%" height="100%">
 
 
 ### 7. 프린트 ###
-<img src="https://github.com/Jun2018/poloride/blob/master/mdImages/image07.png?raw=true" width="100%" height="100%">
+<img src="https://github.com/Jun2018/poloride/blob/master/doc/markdownImages/image07.png?raw=true" width="100%" height="100%">
